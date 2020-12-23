@@ -1,1 +1,4 @@
-MinGW not found at:  Configure
+"E:\Clion\CLion 2019.3.5\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" E:\RayleighZ_ClionPrj\C51_GameBoy
+-- Configuring done
+-- Generating done
+-- Build files have been written to: E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug

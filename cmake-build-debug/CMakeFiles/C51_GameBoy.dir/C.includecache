@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+E:/RayleighZ_ClionPrj/C51_GameBoy/delay_tool/DelayTool.h
+
+E:/RayleighZ_ClionPrj/C51_GameBoy/gpu/GPU.c
+GPU.h
+E:/RayleighZ_ClionPrj/C51_GameBoy/gpu/GPU.h
+reg52.h
+E:/RayleighZ_ClionPrj/C51_GameBoy/gpu/reg52.h
+intrins.h
+E:/RayleighZ_ClionPrj/C51_GameBoy/gpu/intrins.h
+../delay_tool/DelayTool.h
+E:/RayleighZ_ClionPrj/C51_GameBoy/delay_tool/DelayTool.h
+
+E:/RayleighZ_ClionPrj/C51_GameBoy/gpu/GPU.h
+

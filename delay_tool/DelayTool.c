@@ -3,7 +3,7 @@
 * Time: 2020-12-16 17:44
 */
 #include "DelayTool.h"
-
+#include "intrins.h"
 void delay1s(void)   //误差 0us
 {
     unsigned char a,b,c;

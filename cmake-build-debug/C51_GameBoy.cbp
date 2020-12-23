@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="C51_GameBoy"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="E:/cb/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="E:/cb/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/cb/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/cb/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="C51_GameBoy">
+				<Option output="E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/C51_GameBoy.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="E:/cb/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/include"/>
+					<Add directory="E:/cb/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../../include"/>
+					<Add directory="E:/cb/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="E:/cb/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 C51_GameBoy"/>
+					<CompileFile command="E:/cb/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/cb/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/cb/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="C51_GameBoy/fast">
+				<Option output="E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/C51_GameBoy.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="E:/cb/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/include"/>
+					<Add directory="E:/cb/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../../include"/>
+					<Add directory="E:/cb/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="E:/cb/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 C51_GameBoy/fast"/>
+					<CompileFile command="E:/cb/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/cb/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/cb/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="E:/cb/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="E:/cb/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/cb/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/cb/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="E:/cb/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="E:/cb/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/cb/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/cb/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;E:/RayleighZ_ClionPrj/C51_GameBoy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="E:/RayleighZ_ClionPrj/C51_GameBoy/delay_tool/DelayTool.c">
+			<Option target="C51_GameBoy"/>
+		</Unit>
+		<Unit filename="E:/RayleighZ_ClionPrj/C51_GameBoy/delay_tool/DelayTool.h">
+			<Option target="C51_GameBoy"/>
+		</Unit>
+		<Unit filename="E:/RayleighZ_ClionPrj/C51_GameBoy/eat_snake/EatSnake.c">
+			<Option target="C51_GameBoy"/>
+		</Unit>
+		<Unit filename="E:/RayleighZ_ClionPrj/C51_GameBoy/eat_snake/EatSnake.h">
+			<Option target="C51_GameBoy"/>
+		</Unit>
+		<Unit filename="E:/RayleighZ_ClionPrj/C51_GameBoy/game_pad/RedRemote.c">
+			<Option target="C51_GameBoy"/>
+		</Unit>
+		<Unit filename="E:/RayleighZ_ClionPrj/C51_GameBoy/game_pad/RedRemote.h">
+			<Option target="C51_GameBoy"/>
+		</Unit>
+		<Unit filename="E:/RayleighZ_ClionPrj/C51_GameBoy/gpu/GPU.c">
+			<Option target="C51_GameBoy"/>
+		</Unit>
+		<Unit filename="E:/RayleighZ_ClionPrj/C51_GameBoy/gpu/GPU.h">
+			<Option target="C51_GameBoy"/>
+		</Unit>
+		<Unit filename="E:/RayleighZ_ClionPrj/C51_GameBoy/main.c">
+			<Option target="C51_GameBoy"/>
+		</Unit>
+		<Unit filename="E:/RayleighZ_ClionPrj/C51_GameBoy/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
