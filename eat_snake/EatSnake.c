@@ -3,6 +3,7 @@
  * Time: 2020-12-15 20:40
  * Describe: C51 8位机 点阵屏 贪吃蛇游戏
  */
+#include "reg52.h"
 #include "EatSnake.h"
 #include <stdlib.h>
 #include "../delay_tool/DelayTool.h"
@@ -19,6 +20,8 @@ int up = 0;
 int down = 1;
 int left = 2;
 int right = 3;
+int timer = 0;
+unsigned char flag = 1;
 
 int beenX;
 int beenY;
@@ -28,8 +31,7 @@ int screenSize = 8;//点阵屏的宽度大小
 //成像数组，有待优化，因为这里进行了一次封装，
 //所以只能通过大型数组来达到存储的效果
 //也许可以考虑动态增添数组？
-unsigned short *xs;
-unsigned short *ys;
+unsigned char *image;
 //链表的头节点
 struct SnackBody *snack;
 
@@ -47,12 +49,12 @@ void addBody() {
 }
 
 struct SnackBody *createSnack() {
-    struct SnackBody *snackHead = (struct SnackBody *) malloc(sizeof(struct SnackBody));
+    struct SnackBody *snackHead;
     //对生成的第一个头节点的方向进行赋值，默认蛇头方向为向上
     snackHead->dir = up;
     //对蛇头的初始位置进行赋值，默认位置为原点
-    snackHead->x = 0;
-    snackHead->y = 0;
+    snackHead->x = 1;
+    snackHead->y = 1;
     snackHead->next = NULL;
     //prior为null，标志着这个是头节点
     snackHead->prior = NULL;
@@ -156,31 +158,19 @@ void delay(int level) {
 
 //在点阵屏上面展示蛇身
 void showPic() {
-    //不知道会不会爆内存
+    /*//不知道会不会爆内存
     int position;
     struct SnackBody *cursor = snack;
-    for (position = 0; position < screenSize * screenSize; ++position) {
-        ys[position] = 0;
-        xs[position] = 0;
+    for (position = 0; position < screenSize; ++position) {
+        image[position] = 0x00;
     }
-    position = 0;
     while (cursor->next != NULL) {
-        xs[position] = cursor->x;
-        ys[position] = cursor->y;
-        position++;
-    }
-    showByList(xs, ys);
-}
-
-void preLoadImage() {//对成像数组进行预加载
-    int position;
-    //给数组分配内存空间
-    xs = malloc(sizeof(unsigned short) * screenSize * screenSize);
-    ys = malloc(sizeof(unsigned short) * screenSize * screenSize);
-    for (position = 0; position < screenSize * screenSize; ++position) {
-        ys[position] = 0;
-        xs[position] = 0;
-    }
+        //将xy坐标转译为char数组
+        if (cursor->x != 0){
+            image[cursor->y] = image[cursor->y] | 0x01<<cursor->x;
+        }
+    }*/
+    showByList(image);
 }
 
 void turnDir(unsigned char dir) {
@@ -209,7 +199,6 @@ void onKeyDown() interrupt 0
     Time = 0;
     DelayMs(700);
     if (IRIN == 0) {
-
         err = 1000;
         while ((IRIN == 0) && (err > 0)) {
             DelayMs(1);
@@ -253,24 +242,40 @@ void onKeyDown() interrupt 0
     }
 }
 
+void timerConfig() {
+    TMOD |= 0x10; //设置定时计数器工作方式1为定时器
+    TH1 = 0xFF;
+    TL1 = 0xff;
+    ET1 = 1; //开启定时器1中断
+    EA = 1;
+    TR1 = 1; //开启定时器
+}
+
+void onTimeRunOut() interrupt 3
+{
+    TH1 = 0xFF; //重新赋初值
+    TL1 = 0xFf;
+    timer++;
+    if (timer >= 1000 && isAlive()){
+        timer = 0;
+        //进行下一步操作
+        nextStep();
+        showPic();
+    }
+}
+
+
 void gameMain() {
     int level;
+    unsigned char date[8];
+    image = date;
     snack = createSnack();
-    //预加载成像数组
-    preLoadImage();
     //选择游戏难度
     //level = chooseLevel();
     level = 0;
     //初始化红外遥控器
     irInit();
-    xs[0] = 1;
-    ys[0] = 1;
-    showByList(xs , ys);
-    /*while (1*//*isAlive()*//*) {
-        //首先判断延迟时间（游戏速率）
-        P0 = ~P0;
-        delay(level);
-        //nextStep();
-        showPic();
-    }*/
+    //正式打开游戏
+    showPic();
+    //timerConfig();
 }

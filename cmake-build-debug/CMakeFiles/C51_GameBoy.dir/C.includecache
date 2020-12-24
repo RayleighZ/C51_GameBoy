@@ -8,15 +8,43 @@
 
 E:/RayleighZ_ClionPrj/C51_GameBoy/delay_tool/DelayTool.h
 
+E:/RayleighZ_ClionPrj/C51_GameBoy/eat_snake/EatSnake.c
+EatSnake.h
+E:/RayleighZ_ClionPrj/C51_GameBoy/eat_snake/EatSnake.h
+stdlib.h
+-
+../delay_tool/DelayTool.h
+E:/RayleighZ_ClionPrj/C51_GameBoy/delay_tool/DelayTool.h
+../gpu/GPU.h
+E:/RayleighZ_ClionPrj/C51_GameBoy/gpu/GPU.h
+../game_pad/RedRemote.h
+E:/RayleighZ_ClionPrj/C51_GameBoy/game_pad/RedRemote.h
+
+E:/RayleighZ_ClionPrj/C51_GameBoy/eat_snake/EatSnake.h
+
+E:/RayleighZ_ClionPrj/C51_GameBoy/game_pad/RedRemote.c
+RedRemote.h
+E:/RayleighZ_ClionPrj/C51_GameBoy/game_pad/RedRemote.h
+reg52.h
+E:/RayleighZ_ClionPrj/C51_GameBoy/game_pad/reg52.h
+
+E:/RayleighZ_ClionPrj/C51_GameBoy/game_pad/RedRemote.h
+
 E:/RayleighZ_ClionPrj/C51_GameBoy/gpu/GPU.c
 GPU.h
 E:/RayleighZ_ClionPrj/C51_GameBoy/gpu/GPU.h
-reg52.h
-E:/RayleighZ_ClionPrj/C51_GameBoy/gpu/reg52.h
+reg51.h
+E:/RayleighZ_ClionPrj/C51_GameBoy/gpu/reg51.h
 intrins.h
 E:/RayleighZ_ClionPrj/C51_GameBoy/gpu/intrins.h
 ../delay_tool/DelayTool.h
 E:/RayleighZ_ClionPrj/C51_GameBoy/delay_tool/DelayTool.h
 
 E:/RayleighZ_ClionPrj/C51_GameBoy/gpu/GPU.h
+
+E:/RayleighZ_ClionPrj/C51_GameBoy/main.c
+reg52.h
+-
+eat_snake/EatSnake.h
+E:/RayleighZ_ClionPrj/C51_GameBoy/eat_snake/EatSnake.h
 

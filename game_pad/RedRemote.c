@@ -10,10 +10,3 @@ void irInit() {
     EA = 1;  //打开总中断
     IRIN = 1; //初始化端口
 }
-
-/**
- * @description:
- * @param {*}
- * @return {*}
- * @author: 林其星
- */
