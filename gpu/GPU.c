@@ -6,12 +6,12 @@
 #include "reg52.h"
 #include "intrins.h"
 #include "../delay_tool/DelayTool.h"
+/*
 sbit SRCLK= P3^6;
 sbit LCLK= P3 ^5;
 sbit SER= P3^4;
-unsigned char wei[]={0x00, 0x00, 0x3e, 0x41, 0x41, 0x41, 0x3e, 0x00};
 unsigned char ledduan[]={0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80};
-
+unsigned char ledwei[]={0x7f,0xbf,0xdf,0xef,0xf7,0xfb,0xfd,0xfe};
 void hd595(unsigned char dat){
     unsigned char a;
     SRCLK=0;
@@ -47,3 +47,4 @@ void showByList(unsigned char * image){
         }
     }
 }
+*/

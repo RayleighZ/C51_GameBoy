@@ -8,7 +8,6 @@ CMakeFiles/C51_GameBoy.dir/eat_snake/EatSnake.c.obj: ../delay_tool/DelayTool.h
 CMakeFiles/C51_GameBoy.dir/eat_snake/EatSnake.c.obj: ../eat_snake/EatSnake.c
 CMakeFiles/C51_GameBoy.dir/eat_snake/EatSnake.c.obj: ../eat_snake/EatSnake.h
 CMakeFiles/C51_GameBoy.dir/eat_snake/EatSnake.c.obj: ../game_pad/RedRemote.h
-CMakeFiles/C51_GameBoy.dir/eat_snake/EatSnake.c.obj: ../gpu/GPU.h
 
 CMakeFiles/C51_GameBoy.dir/game_pad/RedRemote.c.obj: ../game_pad/RedRemote.c
 CMakeFiles/C51_GameBoy.dir/game_pad/RedRemote.c.obj: ../game_pad/RedRemote.h

@@ -5,9 +5,9 @@
  */
 #include "reg52.h"
 #include "EatSnake.h"
+#include "intrins.h"
 #include <stdlib.h>
 #include "../delay_tool/DelayTool.h"
-#include "../gpu/GPU.h"
 #include "../game_pad/RedRemote.h"
 
 sbit IRIN = P3 ^2;
@@ -27,44 +27,26 @@ int beenX;
 int beenY;
 
 int screenSize = 8;//点阵屏的宽度大小
-
-//成像数组，有待优化，因为这里进行了一次封装，
-//所以只能通过大型数组来达到存储的效果
-//也许可以考虑动态增添数组？
-unsigned char *image;
-//链表的头节点
-struct SnackBody *snack;
-
 typedef struct SnackBody {
-    struct SnackBody *prior;
-    struct SnackBody *next;
+    struct SnackBody * next;
     int x;
     int y;
     int dir;
 } SnackBody;
 
-//不修改头节点，就不添加返回值了
-void addBody() {
+SnackBody snack;
 
-}
-
-struct SnackBody *createSnack() {
-    struct SnackBody *snackHead;
-    //对生成的第一个头节点的方向进行赋值，默认蛇头方向为向上
-    snackHead->dir = up;
-    //对蛇头的初始位置进行赋值，默认位置为原点
-    snackHead->x = 1;
-    snackHead->y = 1;
-    snackHead->next = NULL;
-    //prior为null，标志着这个是头节点
-    snackHead->prior = NULL;
-    return snackHead;
+void createSnack() {
+    snack.x = 1;
+    snack.y = 1;
+    snack.next = NULL;
+    snack.dir = up;
 }
 
 int isAlive() {
-    int headX = snack->x;
-    int headY = snack->y;
-    struct SnackBody *cursor = snack;//检索遍历用的游标
+    int headX = snack.x;
+    int headY = snack.y;
+    SnackBody *cursor = &snack;//检索遍历用的游标
     while (cursor->next != NULL) {//遍历检索，如果蛇头和蛇身碰撞，就判定游戏结束
         if (cursor->y == headY && cursor->x == headX) {
             return 0;
@@ -74,60 +56,102 @@ int isAlive() {
     return 1;
 }
 
-void move(struct SnackBody *snackBody) {
-    switch (snackBody->dir) {
-        case 0: {
-            snackBody->y = (snackBody->y++) % screenSize;
-            break;
-        }
-        case 1: {
-            snackBody->y = (snackBody->y--) % screenSize;
-            break;
-        }
-        case 2: {
-            snackBody->x = (snackBody->x--) % screenSize;
-            break;
-        }
-        case 3: {
-            snackBody->x = (snackBody->x++) % screenSize;
-            break;
-        }
-    }
-}
-
 void nextStep() {
     //遍历蛇身，让它前进
-    struct SnackBody *cursor = snack;
-    while (cursor->next != NULL) {
-        move(cursor);
+    SnackBody *cursor = &snack;
+    SnackBody *prior = &snack;
+    while (cursor != NULL) {
+        switch ((*cursor).dir) {
+            case 0: {
+                (*cursor).y = ((*cursor).y+1)%9;
+                break;
+            }
+            case 1: {
+                (*cursor).y = ((*cursor).y-1)%9;
+                break;
+            }
+            case 2: {
+                (*cursor).x = ((*cursor).x-1)%9;
+                break;
+            }
+            case 3: {
+                (*cursor).x = ((*cursor).x+1)%9;
+                break;
+            }
+        }
+        if ((*cursor).dir == right || ((*cursor).dir) == up){
+            if ((*cursor).y == 0){
+                (*cursor).y = 1;
+            }
+            if ((*cursor).x == 0){
+                (*cursor).x = 1;
+            }
+        } else {
+            if ((*cursor).y == 0){
+                (*cursor).y = 8;
+            }
+            if ((*cursor).x == 0){
+                (*cursor).x = 8;
+            }
+        }
+        cursor->dir = prior->dir;
+        prior = cursor;
+        //接下来将父节点的dir给子节点
         cursor = cursor->next;
     }
 }
 
-int chooseLevel() {
-    if (P3 != ~0x00) {
-        delay10ms();
-        if (P3 != ~0x00) {
-            switch (P3) {
-                case ~0x01: {//0001
-                    return 0;
-                }
-                case ~0x02: {//0010
-                    return 1;
-                }
-                case ~0x04: {//0100
-                    return 2;
-                }
-                case ~0x08: {//1000
-                    return 3;
-                }
-            }
+//不修改头节点，就不添加返回值了
+//思路为头节点后面直接补充一个
+void addBody() {
+    SnackBody * cursor = &snack;
+    SnackBody tail;
+    while (cursor->next != NULL){
+        cursor = cursor->next;
+    }
+    tail.next = NULL;
+    tail.dir = cursor->dir;
+    tail.x = cursor->x;
+    tail.y = cursor->y;
+    switch (cursor->dir) {
+        case 0: {
+            tail.y = ((*cursor).y-1)%9;
+            break;
+        }
+        case 1: {
+            tail.y = ((*cursor).y+1)%9;
+            break;
+        }
+        case 2: {
+            tail.x = ((*cursor).x+1)%9;
+            break;
+        }
+        case 3: {
+            tail.x = ((*cursor).x-1)%9;
+            break;
         }
     }
+    if ((*cursor).dir == right || ((*cursor).dir) == up){
+        if (tail.y == 0){
+            tail.y = 1;
+        }
+        if (tail.x == 0){
+            tail.x = 1;
+        }
+    } else {
+        if (tail.y == 0){
+            tail.y = 8;
+        }
+        if (tail.x == 0){
+            tail.x = 8;
+        }
+    }
+    cursor->next = &tail;
 }
 
 void createBeen() {
-
+    beenX = rand()%8 + 1;
+    beenY = rand()%8 + 1;
 }
 
 void DelayMs(unsigned int i) //0.14ms误差 0us
@@ -155,38 +179,47 @@ void delay(int level) {
         }
     }
 }
-
+unsigned char image [8] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+struct SnackBody *cursor;
 //在点阵屏上面展示蛇身
 void showPic() {
-    /*//不知道会不会爆内存
-    int position;
-    struct SnackBody *cursor = snack;
-    for (position = 0; position < screenSize; ++position) {
-        image[position] = 0x00;
+
+    int a;
+    cursor = &snack;
+    for (a = 0; a < 8; ++a) {
+        image[a] = 0x00;
     }
-    while (cursor->next != NULL) {
+    while (cursor != NULL) {
+        //image[0] = image[0] | single<<(0);
         //将xy坐标转译为char数组
-        if (cursor->x != 0){
-            image[cursor->y] = image[cursor->y] | 0x01<<cursor->x;
+        if (cursor->x != 0 && cursor->y != 0){
+            image[cursor->y - 1] = image[cursor->y - 1] | 0x80>>(cursor->x - 1);
         }
-    }*/
-    showByList(image);
+        cursor = cursor->next;
+    }
+    //接下来展示豆子
+    image[beenY - 1] = image[beenY - 1] | 0x80>>(beenX - 1);
+    if (snack.x == beenX && snack.y == beenY){
+        //表示蛇已经恰倒了实物
+        createBeen();
+        addBody();
+    }
 }
 
 void turnDir(unsigned char dir) {
     switch (dir) {
         {
             case 0x18:
-                snack->dir = right;
+                snack.dir = up;
             break;
             case 0x08://4
-                snack->dir = up;
+                snack.dir = left;
             break;
             case 0x5a:
-                snack->dir = down;
+                snack.dir = right;
             break;
             case 0x52:
-                snack->dir = left;
+                snack.dir = down;
             break;
         }
     }
@@ -235,41 +268,84 @@ void onKeyDown() interrupt 0
                 }
             }
         }
+        turnDir(IrValue[2]);
         if (IrValue[2] != ~IrValue[3]) {
-            turnDir(IrValue[2]);
             return;
         }
     }
 }
-
-void timerConfig() {
+/*void timerConfig() {
     TMOD |= 0x10; //设置定时计数器工作方式1为定时器
-    TH1 = 0xFF;
+    TH1 = 0xff;
     TL1 = 0xff;
     ET1 = 1; //开启定时器1中断
-    EA = 1;
     TR1 = 1; //开启定时器
+}*/
+
+sbit SRCLK= P3^6;
+sbit LCLK= P3 ^5;
+sbit SER= P3^4;
+unsigned char ledduan[]={0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80};
+unsigned char ledwei[]={0x7f,0xbf,0xdf,0xef,0xf7,0xfb,0xfd,0xfe};
+void hd595(unsigned char dat){
+    unsigned char a;
+    SRCLK=0;
+    LCLK=0;
+    for(a=0;a<8;a++)
+    {
+        SER=dat>>7;
+        dat<<=1;
+        _nop_();
+        _nop_();
+        SRCLK=1;
+        SRCLK=0;
+    }
+
+    LCLK=1;
+    _nop_();
+    _nop_();
+    RCLK=0;
 }
 
-void onTimeRunOut() interrupt 3
+void showByList(){
+    int i;
+    int a = 0;
+    P0 = 0xff;
+    while (a <= 1000){
+        for (i = 0; i < 8; ++i) {
+            //首先完成对P0口的赋值
+            P0 = ~image[i];
+            //接下来进行移位寄存器的处理
+            hd595(ledduan[i]);
+            delay1ms();
+            hd595(0x00);
+            a++;
+        }
+    }
+    //在这里之后需要启动下一步
+    nextStep();
+    showPic();
+    showByList();
+}
+
+/*void timeCur() *//*interrupt 3*//*
 {
-    TH1 = 0xFF; //重新赋初值
-    TL1 = 0xFf;
+    TH1 = 0xff; //重新赋初值
+    TL1 = 0xff;
     timer++;
-    if (timer >= 1000 && isAlive()){
+    if (timer >= 100000 *//*&& isAlive()*//*){
         timer = 0;
         //进行下一步操作
         nextStep();
         showPic();
     }
-}
+}*/
 
 
 void gameMain() {
     int level;
-    unsigned char date[8];
-    image = date;
-    snack = createSnack();
+    createSnack();
+    createBeen();
     //选择游戏难度
     //level = chooseLevel();
     level = 0;
@@ -277,5 +353,5 @@ void gameMain() {
     irInit();
     //正式打开游戏
     showPic();
-    //timerConfig();
+    showByList();
 }
